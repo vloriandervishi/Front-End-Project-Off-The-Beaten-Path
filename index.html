@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Off the Beaten Path</title>
+</head>
+<body class="has-background-dark">
+    <main>
+        <header>
+            <h1 class="title is-1 has-text-centered has-text-danger-dark">Off The Beaten Path</h1>
+        </header>
+        <!-- hero/jumbotron -->
+        <section class="hero is-medium">
+            <div class="hero-body">
+                <div class="field is-flex is-justify-content-center">
+                    <label for="trail" class="has-text-white"> Enter Trail Name :</label>
+                    <input type="text" name="trailName" id="trail-input-name" placeholder="Trail Name" class="input is-medium is-danger">
+                    <button class="button is-medium is-dark" type="submit">Submit</button>
+                </div>
+            </div>
+        </section>
+        <div>
+            <div class="columns has-border">
+                <!-- Trail Info-list -->
+                <section class="column is-half">
+                    <h2 class="title has-text-centered">Trail Info:</h2>
+                </section>
+                <!-- Weather Data -->
+                <section class="column is-one-third">
+                    <h2 class="title-2 has-text-centered">Weather Data: </h2>
+                    <p>Temperature: </p>
+                    <p>Humidity: </p>
+                    <p>Wind Speed: </p>
+                </section>
+                <!-- Search History -->
+                <section class="column is-one-fifth">
+                    <h2 class="title has-text-centered">Search History:</h2>
+                </section>
+            </div>
+        </div>
+    </main>
+    <footer></footer>
+</body>
+</html>
