@@ -1,8 +1,23 @@
 var appId = "af9ded99d1790eca45328d602b9e06d9";
-var city = "Knoxville";
+var searchLocation = "Knoxville";
 var units = "imperial";
 var userCoordinates = "";
 
+function getLocation() {
+    if (navigator.geolocation) {
+      var userLocation = navigator.geolocation.getCurrentPosition(showPosition);
+      console.log(userLocation);
+    }
+    else {
+        alert("Geolocation is not supported by this browser.");
+    }
+}
+
+function showPosition(position) {
+    userCoordinates = position.coords.latitude +
+    "+" + position.coords.longitude;
+    console.log(userCoordinates);
+}
 
 // toggle trail difficulty
 var difficultySet = function(dataSet) {
@@ -25,7 +40,7 @@ var difficultySet = function(dataSet) {
     }
 };
 
-var getLocationData = function(city) {fetch("https://api.tomtom.com/search/2/geocode/" + city + ".json?key=" + "R3bR5vBrreR1ZaW1HA8lNL9Tjic0vIKa").then(function(response) {
+var getLocationData = function(searchLocation) {fetch("https://api.tomtom.com/search/2/geocode/" + searchLocation + ".json?key=" + "R3bR5vBrreR1ZaW1HA8lNL9Tjic0vIKa").then(function(response) {
     if (response.ok) {
         response.json().then(function(data) {
             console.log(data)
@@ -76,9 +91,10 @@ var getLocationData = function(city) {fetch("https://api.tomtom.com/search/2/geo
             
         }
         else {
-            alert("Unable to display information for that city. Make sure it is spelled correctly.");
+            alert("Unable to display information for that location. Make sure it is spelled correctly.");
         }
     });
 };
 
-getLocationData(city);
+getUserLocation();
+getLocationData(searchLocation);
