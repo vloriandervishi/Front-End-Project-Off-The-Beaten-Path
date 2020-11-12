@@ -3,7 +3,7 @@ var searchLocation = "Knoxville";
 var units = "imperial";
 var userCoordinates = "";
 
-function getLocation() {
+function getUserLocation() {
     if (navigator.geolocation) {
       var userLocation = navigator.geolocation.getCurrentPosition(showPosition);
       console.log(userLocation);
@@ -18,6 +18,49 @@ function showPosition(position) {
     "+" + position.coords.longitude;
     console.log(userCoordinates);
 }
+
+
+var getHourly = function(lat, lon, trName) {fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=minutely,&units=" + units + "&appid=" + appId).then(function(response) {
+        if (response.ok) {
+            response.json().then(function(data) {
+                console.log(trName)
+                var hourlyForecast = data.hourly;
+                hourlyForecast.splice(8);
+                var currentDate = dayjs();
+                var currentHour = parseInt(currentDate.format("h"));
+                var amPm = currentDate.format("A");
+                for (var i = 0; i < hourlyForecast.length; ++i) {
+                    var forecastHour = currentHour + i;
+                    
+                    if (i >= 1 && forecastHour + i === 12) {
+                        switch (amPm) {
+                            case "PM":
+                                amPM = "AM";
+                                break;
+                            case "AM":
+                                amPm = "PM";
+                                break;
+                        }
+
+                    }
+                    if (forecastHour > 12) {
+                        forecastHour = forecastHour - 12;
+                    }
+                    var forecastTime = forecastHour + " " + amPm;
+                    console.log (forecastTime);
+                    var forecastCondition = hourlyForecast[i].weather[0].description;
+                    if (forecastCondition === "clear sky") {
+                        forecastCondition = "clear skies";
+                    }
+                    console.log ("Forecast calls for " + forecastCondition + ".");
+                }                
+            });
+        }
+        else {
+            alert("Unable to display five day forecast. Please try again");
+        }
+    });
+};
 
 // toggle trail difficulty
 var difficultySet = function(dataSet) {
@@ -81,7 +124,7 @@ var getLocationData = function(searchLocation) {fetch("https://api.tomtom.com/se
                                     console.log("Condition: " + trCondition, "Difficulty: " + trDifficulty)
                                     console.log(directions);
                                     console.log(moreInformation)
-                                    // getHourly(trLat, trLon, trName);
+                                    getHourly(trLat, trLon, trName);
                                 }
                             }
                         })
@@ -95,6 +138,7 @@ var getLocationData = function(searchLocation) {fetch("https://api.tomtom.com/se
         }
     });
 };
+
 
 getUserLocation();
 getLocationData(searchLocation);
