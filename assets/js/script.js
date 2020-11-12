@@ -1,3 +1,30 @@
+var appId = "af9ded99d1790eca45328d602b9e06d9";
+var city = "Knoxville";
+var units = "imperial";
+var userCoordinates = "";
+
+
+// toggle trail difficulty
+var difficultySet = function(dataSet) {
+    switch (dataSet) {
+        case "green":
+            trDifficulty = "Beginner";
+            break;
+        case "greenBlue": 
+            trDifficulty = "Beginner to Intermediate";
+            break;
+        case "blue":
+            trDifficulty = "Intermediate";
+            break;
+        case "blueBlack":
+            trDifficulty = "Intermediate to Expert";
+            break;
+        case "black":
+            trDifficulty = "Expert";
+            break;
+    }
+};
+
 var getLocationData = function(city) {fetch("https://api.tomtom.com/search/2/geocode/" + city + ".json?key=" + "R3bR5vBrreR1ZaW1HA8lNL9Tjic0vIKa").then(function(response) {
     if (response.ok) {
         response.json().then(function(data) {
@@ -39,7 +66,7 @@ var getLocationData = function(city) {fetch("https://api.tomtom.com/search/2/geo
                                     console.log("Condition: " + trCondition, "Difficulty: " + trDifficulty)
                                     console.log(directions);
                                     console.log(moreInformation)
-                                    getHourly(trLat, trLon, trName);
+                                    // getHourly(trLat, trLon, trName);
                                 }
                             }
                         })
@@ -53,3 +80,5 @@ var getLocationData = function(city) {fetch("https://api.tomtom.com/search/2/geo
         }
     });
 };
+
+getLocationData(city);
