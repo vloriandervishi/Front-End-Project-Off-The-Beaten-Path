@@ -16,14 +16,17 @@
         <section class="hero is-medium is-justify-content-center">
             <div class="hero-body">
                 <div class="field is-flex">
-                    <label for="trail" class="has-text-white"> Search a location</label>
-                    <input type="text" name="trailName" id="trail-input-name" placeholder="Trail Name" class="input is-medium is-danger">
+                    <input type="text" name="trailName" id="trail-input-name" placeholder="Search a Location" class="input is-medium is-danger">
                     <button class="button is-medium is-dark" type="submit">Submit</button>
                 </div>
             </div>
         </section>
         <div>
             <div class="columns has-border">
+                <!-- Search History -->
+                <section class="column is-one-fifth">
+                    <h2 class="title has-text-white has-text-centered">Search History:</h2>
+                </section>
                 <!-- Trail Info-list -->
                 <section class="column is-half">
                     <h2 class="title has-text-white has-text-centered">Trail Info:</h2>
@@ -36,26 +39,32 @@
                     <h2 class="title has-text-centered has-text-white">Weather Data: </h2>
                     <div class="rows has-text-white" id="weather-wrapper">
                         <div class="box">
-                            <p>Temperature: </p>
+                            <span></span>
                         </div>
                         <div class="box">
-                            <p>Sunrise: </p>
+                            <span></span>
                         </div>
                         <div class="box">
-                            <p>Sunset: </p>
+                            <span></span>
                         </div>
                         <div class="box">
-                            <p>Humidity: </p>
+                            <span></span>
                         </div>
                         <div class="box">
-                            <p>Wind Speed: </p>
+                            <span></span>
+                        </div>
+                        <div class="box">
+                            <span></span>
+                        </div>
+                        <div class="box">
+                            <span></span>
+                        </div>
+                        <div class="box">
+                            <span></span>
                         </div>
                     </div>
                 </section>
-                <!-- Search History -->
-                <section class="column is-one-fifth">
-                    <h2 class="title has-text-white has-text-centered">Search History:</h2>
-                </section>
+                
             </div>
         </div>
     </main>
