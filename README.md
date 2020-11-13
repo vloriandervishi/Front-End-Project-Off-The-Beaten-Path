@@ -46,6 +46,8 @@ A simple app that helps you find hiking trails nearby your chosen location.
 - 8 of the user's most recent searches are saved as search history.
 - User can favorite trails to conveniently find them again  
 
+[Back to Contents](#table-of-contents)
+
 ---
 
 ## Contribution
