@@ -23,9 +23,9 @@ A simple app that helps you find hiking trails nearby your chosen location.
 - HTML
 - CSS
 - Javascript
-- [JQuery](https://jquery.com/) (https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js)
-- [Bulma](https://bulma.io/) (https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css)
-- [Day.js](https://day.js.org/) (https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.9.6/dayjs.min.js)
+- [JQuery](https://jquery.com/) Version Link: (https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js)
+- [Bulma](https://bulma.io/) Version Link: (https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css)
+- [Day.js](https://day.js.org/) Version Link: (https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.9.6/dayjs.min.js)
 
 [Back to Contents](#table-of-contents)
 
