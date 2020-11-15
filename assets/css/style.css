@@ -8,3 +8,6 @@
     align-items: flex-start;
     background-attachment: fixed;
 }
+#infoBox{
+    width:100%;
+}
