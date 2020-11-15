@@ -61,13 +61,40 @@ var getHourly = function (lat, lon, trName) {
           if (forecastCondition === "clear sky") {
             forecastCondition = "clear skies";
           }
-
+           let byHour=i;
+           if(byHour===0){
+            var spanEl= document.getElementById("bx1");
+            spanEl.textContent=trName +' at: '+forecastHour + '... '+ forecastCondition;
+           }else if(byHour===1){
+            var spanEl2= document.getElementById("bx2");
+            spanEl2.textContent=trName +' at: '+forecastHour + '... '+ forecastCondition;
+           }else if(byHour===2){
+            var spanEl3= document.getElementById("bx3");
+            spanEl3.textContent=trName +' at: '+forecastHour + '... '+ forecastCondition;
+           }
+           else if(byHour===3){
+            var spanEl4= document.getElementById("bx4");
+            spanEl4.textContent=trName +' at: '+forecastHour + '... '+ forecastCondition;
+           }else if(byHour===4){
+            var spanEl5= document.getElementById("bx5");
+            spanEl5.textContent=trName +' at: '+forecastHour + '... '+ forecastCondition;
+           }
+           else if(byHour===5){
+            var spanEl6= document.getElementById("bx6");
+            spanEl6.textContent=trName +' at: '+forecastHour + '... '+ forecastCondition;
+           }else if(byHour===6){
+            var spanEl7= document.getElementById("bx7");
+            spanEl7.textContent=trName +' at: '+forecastHour + '... '+ forecastCondition;
+           }
+           else if(byHour===7){
+            var spanEl8= document.getElementById("bx8");
+            spanEl8.textContent=trName +' at: '+forecastHour + '... '+ forecastCondition;
+           }else {
+               console.error("something went wrong!");
+           }
           // This is what needs to display to the page, preferably only after the user clicks on a trail
           console.log(forecastHour);
-          var spanEl=document.querySelector('span');
-          var frEl=document.createElement('span');
-          frEl.textContent=forecastHour;
-          spanEl.append(frEl);
+        
           console.log("Forecast calls for " + forecastCondition + ".");
         }
       });
