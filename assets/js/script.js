@@ -125,6 +125,9 @@ var difficultySet = function (dataSet) {
 
 // This is the function that gets the Location data the first call is to TomTom
 var getLocationData = function (searchLocation) {
+  $(".trailDiv").each(function(){
+    $(this).remove();
+  })
   fetch(
     "https://api.tomtom.com/search/2/geocode/" +
       searchLocation +
@@ -145,6 +148,8 @@ var getLocationData = function (searchLocation) {
           data.results[0].address.countryCode;
         // This resultPlacename should be displayed at the top of the trail info list
         // It can take the place of the textContent of the h2 that says "Trail Info:"
+        var trailHeadingEl = document.getElementById("trail-info");
+        trailHeadingEl.textContent = resultPlaceName + " trail info:"
         console.log(resultPlaceName);
 
         // This is the API call to Hiking Project
@@ -199,9 +204,11 @@ var getLocationData = function (searchLocation) {
                 // These Logs represent the information that should be displayed to the page under the Trail Info List
                 // For each Trail, there should be a new div list item with the following as textContent
                // console.log(trName);
+                var trailDivEl = document.createElement("div");
+                trailDivEl.classList ="trailDiv box has-background-danger-dark has-text-white";
                 var ulEl = document.createElement("ul");
                 var liEl = document.createElement("li");
-                liEl.textContent = resultPlaceName;
+                liEl.textContent = trName;
                 var trliEl = document.createElement("li");
                 trliEl.textContent = trName;
                 
@@ -222,15 +229,16 @@ var getLocationData = function (searchLocation) {
 
                 var direliEl=document.createElement('li');
 
-                direliEl.textContent=directions;
+                direliEl.innerHTML = "<a href='" + directions + "' target='_blank'>Directions</a>";
               //  console.log(directions);
                 var infoliEl=document.createElement('li');
-                infoliEl.textContent=moreInformation;
+                infoliEl.innerHTML = "<a href='" + moreInformation + "' target='_blank'>More Information</a>";
               //  console.log(moreInformation);
-                var wrapPer = document.querySelector("#infoBox");
+                var trailSectionEl = document.querySelector("#trail-info-section");
                
                 ulEl.append(liEl,trSliEl, trliEl,latliEl,trliEl,trdliEl,direliEl,infoliEl);
-                wrapPer.append(ulEl);
+                trailDivEl.append(ulEl);
+                trailSectionEl.append(trailDivEl);
 
                 // This calls the Hourly Forecast using the latitude and longitude for the trail.
                 // It also passes in the trail name for easier access.
