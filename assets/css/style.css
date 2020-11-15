@@ -1,13 +1,13 @@
 .hero {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    background-image: url(../Images/Hike\ 1.jpg);
-    background-size: cover;
-    background-position: 80%;
-    align-items: flex-start;
-    background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-image: url(../Images/Hike\ 1.jpg);
+  background-size: cover;
+  background-position: 80%;
+  align-items: flex-start;
+  background-attachment: fixed;
 }
-#infoBox{
-    width:100%;
+#infoBox {
+  width: 100%;
 }

@@ -61,40 +61,45 @@ var getHourly = function (lat, lon, trName) {
           if (forecastCondition === "clear sky") {
             forecastCondition = "clear skies";
           }
-           let byHour=i;
-           if(byHour===0){
-            var spanEl= document.getElementById("bx1");
-            spanEl.textContent=trName +' at: '+forecastHour + '... '+ forecastCondition;
-           }else if(byHour===1){
-            var spanEl2= document.getElementById("bx2");
-            spanEl2.textContent=trName +' at: '+forecastHour + '... '+ forecastCondition;
-           }else if(byHour===2){
-            var spanEl3= document.getElementById("bx3");
-            spanEl3.textContent=trName +' at: '+forecastHour + '... '+ forecastCondition;
-           }
-           else if(byHour===3){
-            var spanEl4= document.getElementById("bx4");
-            spanEl4.textContent=trName +' at: '+forecastHour + '... '+ forecastCondition;
-           }else if(byHour===4){
-            var spanEl5= document.getElementById("bx5");
-            spanEl5.textContent=trName +' at: '+forecastHour + '... '+ forecastCondition;
-           }
-           else if(byHour===5){
-            var spanEl6= document.getElementById("bx6");
-            spanEl6.textContent=trName +' at: '+forecastHour + '... '+ forecastCondition;
-           }else if(byHour===6){
-            var spanEl7= document.getElementById("bx7");
-            spanEl7.textContent=trName +' at: '+forecastHour + '... '+ forecastCondition;
-           }
-           else if(byHour===7){
-            var spanEl8= document.getElementById("bx8");
-            spanEl8.textContent=trName +' at: '+forecastHour + '... '+ forecastCondition;
-           }else {
-               console.error("something went wrong!");
-           }
+          let byHour = i;
+          if (byHour === 0) {
+            var spanEl = document.getElementById("bx1");
+            spanEl.textContent =
+              trName + " at: " + forecastHour + "... " + forecastCondition;
+          } else if (byHour === 1) {
+            var spanEl2 = document.getElementById("bx2");
+            spanEl2.textContent =
+              trName + " at: " + forecastHour + "... " + forecastCondition;
+          } else if (byHour === 2) {
+            var spanEl3 = document.getElementById("bx3");
+            spanEl3.textContent =
+              trName + " at: " + forecastHour + "... " + forecastCondition;
+          } else if (byHour === 3) {
+            var spanEl4 = document.getElementById("bx4");
+            spanEl4.textContent =
+              trName + " at: " + forecastHour + "... " + forecastCondition;
+          } else if (byHour === 4) {
+            var spanEl5 = document.getElementById("bx5");
+            spanEl5.textContent =
+              trName + " at: " + forecastHour + "... " + forecastCondition;
+          } else if (byHour === 5) {
+            var spanEl6 = document.getElementById("bx6");
+            spanEl6.textContent =
+              trName + " at: " + forecastHour + "... " + forecastCondition;
+          } else if (byHour === 6) {
+            var spanEl7 = document.getElementById("bx7");
+            spanEl7.textContent =
+              trName + " at: " + forecastHour + "... " + forecastCondition;
+          } else if (byHour === 7) {
+            var spanEl8 = document.getElementById("bx8");
+            spanEl8.textContent =
+              trName + " at: " + forecastHour + "... " + forecastCondition;
+          } else {
+            console.error("something went wrong!");
+          }
           // This is what needs to display to the page, preferably only after the user clicks on a trail
           console.log(forecastHour);
-        
+
           console.log("Forecast calls for " + forecastCondition + ".");
         }
       });
@@ -200,38 +205,46 @@ var getLocationData = function (searchLocation) {
                   "https://www.hikingproject.com/trail/" + trId;
                 // These Logs represent the information that should be displayed to the page under the Trail Info List
                 // For each Trail, there should be a new div list item with the following as textContent
-               // console.log(trName);
+                // console.log(trName);
                 var ulEl = document.createElement("ul");
                 var liEl = document.createElement("li");
                 liEl.textContent = resultPlaceName;
                 var trliEl = document.createElement("li");
                 trliEl.textContent = trName;
-                
-               // console.log("Lat: " + trLat, "Lon: " + trLon);
-                var latliEl=document.createElement('li');
-                var trSliEl=document.createElement('li');
-                trSliEl.textContent=trSummary;
-                latliEl.textContent="Lat: " + trLat + " Lon: " + trLon;
+
+                // console.log("Lat: " + trLat, "Lon: " + trLon);
+                var latliEl = document.createElement("li");
+                var trSliEl = document.createElement("li");
+                trSliEl.textContent = trSummary;
+                latliEl.textContent = "Lat: " + trLat + " Lon: " + trLon;
                 //console.log(trSummary);
-                
-               
-                var trliEl=document.createElement('li');
-                trliEl.textContent="Trail condition: " + trCondition;
-              //  console.log("Trail condition: " + trCondition);
-                var trdliEl=document.createElement('li');
-                trdliEl.textContent="Difficulty: " + trDifficulty;
-               // console.log("Difficulty: " + trDifficulty);
 
-                var direliEl=document.createElement('li');
+                var trliEl = document.createElement("li");
+                trliEl.textContent = "Trail condition: " + trCondition;
+                //  console.log("Trail condition: " + trCondition);
+                var trdliEl = document.createElement("li");
+                trdliEl.textContent = "Difficulty: " + trDifficulty;
+                // console.log("Difficulty: " + trDifficulty);
 
-                direliEl.textContent=directions;
-              //  console.log(directions);
-                var infoliEl=document.createElement('li');
-                infoliEl.textContent=moreInformation;
-              //  console.log(moreInformation);
+                var direliEl = document.createElement("li");
+
+                direliEl.textContent = directions;
+                //  console.log(directions);
+                var infoliEl = document.createElement("li");
+                infoliEl.textContent = moreInformation;
+                //  console.log(moreInformation);
                 var wrapPer = document.querySelector("#infoBox");
-               
-                ulEl.append(liEl,trSliEl, trliEl,latliEl,trliEl,trdliEl,direliEl,infoliEl);
+
+                ulEl.append(
+                  liEl,
+                  trSliEl,
+                  trliEl,
+                  latliEl,
+                  trliEl,
+                  trdliEl,
+                  direliEl,
+                  infoliEl
+                );
                 wrapPer.append(ulEl);
 
                 // This calls the Hourly Forecast using the latitude and longitude for the trail.
