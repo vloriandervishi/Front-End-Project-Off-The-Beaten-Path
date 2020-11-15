@@ -93,7 +93,7 @@ var getHourly = function (lat, lon, trName) {
            }
           // This is what needs to display to the page, preferably only after the user clicks on a trail
           console.log(forecastHour);
-
+        
           console.log("Forecast calls for " + forecastCondition + ".");
         }
       });
@@ -219,13 +219,16 @@ var getLocationData = function (searchLocation) {
                 trSliEl.textContent=trSummary;
                 latliEl.innerHTML="Lat: <span id='thisTrLat'>" + trLat + "</span> Lon: <span id='thisTrLon'>" + trLon + "</span>";
                 //console.log(trSummary);
+                
+               
+                var trliEl=document.createElement('li');
+                trliEl.textContent="Trail condition: " + trCondition;
+              //  console.log("Trail condition: " + trCondition);
+                var trdliEl=document.createElement('li');
+                trdliEl.textContent="Difficulty: " + trDifficulty;
+               // console.log("Difficulty: " + trDifficulty);
 
-                var trliEl = document.createElement("li");
-                trliEl.textContent = "Trail condition: " + trCondition;
-                //  console.log("Trail condition: " + trCondition);
-                var trdliEl = document.createElement("li");
-                trdliEl.textContent = "Difficulty: " + trDifficulty;
-                // console.log("Difficulty: " + trDifficulty);
+                var direliEl=document.createElement('li');
 
                 direliEl.innerHTML = "<a href='" + directions + "' target='_blank'>Directions</a>";
               //  console.log(directions);
