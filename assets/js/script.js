@@ -3,6 +3,7 @@ var appId = "af9ded99d1790eca45328d602b9e06d9";
 // after search submission is set up, searchLocation needs to be moved to the inside of the search listener/handler
 var searchInput = document.getElementById("trail-input-name");
 var searchContainerEl = document.getElementById("searchContainer");
+var trailSectionEl = document.querySelector("#trail-info-section");
 
 
 // units sets the input format from OpenWeather, in case we decide to pull a temp or something like that
@@ -167,20 +168,20 @@ var getLocationData = function (searchLocation) {
                   "Unable to find any hiking trails within 50 miles of the location you searched."
                 );
               } else {
-                //  for (var i = 0; i < data.trails.length; ++i) {
+                 for (var i = 0; i < data.trails.length; ++i) {
                 // This gets the difficulty rating
-                difficultySet(data.trails[0].difficulty);
+                difficultySet(data.trails[i].difficulty);
                 // This gets the trail ID that is used to get more information from Hiking Project
-                var trId = data.trails[0].id;
+                var trId = data.trails[i].id;
                 // These get the trail latitude and longitude for the directions and hourly forecast
-                var trLat = data.trails[0].latitude;
-                var trLon = data.trails[0].longitude;
+                var trLat = data.trails[i].latitude;
+                var trLon = data.trails[i].longitude;
                 // This gets the trail name
-                var trName = data.trails[0].name;
+                var trName = data.trails[i].name;
                 // This gets the trail description
-                var trSummary = data.trails[0].summary;
+                var trSummary = data.trails[i].summary;
                 // This gets the trail condition (dry, muddy, etc.)
-                var trCondition = data.trails[0].conditionDetails;
+                var trCondition = data.trails[i].conditionDetails;
                 if (!trCondition) {
                   trCondition =
                     "No condition information has been provided for this trail yet.";
@@ -208,7 +209,7 @@ var getLocationData = function (searchLocation) {
                 trailDivEl.classList ="trailDiv box has-background-danger-dark has-text-white";
                 var ulEl = document.createElement("ul");
                 var liEl = document.createElement("li");
-                liEl.textContent = trName;
+                liEl.innerHTML ="<span id='thisTrName'>" + trName + "</span>";
                 var trliEl = document.createElement("li");
                 trliEl.textContent = trName;
                 
@@ -216,7 +217,7 @@ var getLocationData = function (searchLocation) {
                 var latliEl=document.createElement('li');
                 var trSliEl=document.createElement('li');
                 trSliEl.textContent=trSummary;
-                latliEl.textContent="Lat: " + trLat + " Lon: " + trLon;
+                latliEl.innerHTML="Lat: <span id='thisTrLat'>" + trLat + "</span> Lon: <span id='thisTrLon'>" + trLon + "</span>";
                 //console.log(trSummary);
                 
                
@@ -234,19 +235,19 @@ var getLocationData = function (searchLocation) {
                 var infoliEl=document.createElement('li');
                 infoliEl.innerHTML = "<a href='" + moreInformation + "' target='_blank'>More Information</a>";
               //  console.log(moreInformation);
-                var trailSectionEl = document.querySelector("#trail-info-section");
+                
                
                 ulEl.append(liEl,trSliEl, trliEl,latliEl,trliEl,trdliEl,direliEl,infoliEl);
                 trailDivEl.append(ulEl);
                 trailSectionEl.append(trailDivEl);
-
+              }
                 // This calls the Hourly Forecast using the latitude and longitude for the trail.
                 // It also passes in the trail name for easier access.
                 // Right now getHourly is called every time you run a search,
                 // but it would be better if the search only ran when the trail info is clicked
                 // To do that, I think we will need a listener for a click on the trail div
                 // This can be done easily with jQuery
-                getHourly(trLat, trLon, trName);
+                
                 // }
               }
             });
@@ -269,7 +270,17 @@ var locationSubmitHandler = function(event) {
     console.log(searchLocation);
   };
 
+
 searchContainerEl.addEventListener("submit", locationSubmitHandler);
 
+$("#trail-info-section").on("click", "div", function(){
+  var thisTrName = $(this).find("#thisTrName").text();
+  console.log(thisTrName);
+  var thisTrLat= $(this).find("#thisTrLat").text();
+  console.log(thisTrLat);
+  var thisTrLon= $(this).find("#thisTrLon").text();
+  console.log(thisTrLon);
+  getHourly(thisTrLat, thisTrLon, thisTrName);
+});
 
 getUserLocation();
