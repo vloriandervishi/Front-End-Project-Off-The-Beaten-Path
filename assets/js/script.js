@@ -2,12 +2,8 @@ var appId = "af9ded99d1790eca45328d602b9e06d9";
 // searchLocation is a temporary variable that needs to be removed once the search submission is set up
 // after search submission is set up, searchLocation needs to be moved to the inside of the search listener/handler
 var searchInput = document.getElementById("trail-input-name");
-var submit = document.getElementById("submit");
-submit.addEventListener("click", function () {
-  var searchLocation = searchInput.value;
-  getLocationData(searchLocation);
-  console.log(searchLocation);
-});
+var searchContainerEl = document.getElementById("searchContainer");
+
 
 // units sets the input format from OpenWeather, in case we decide to pull a temp or something like that
 var units = "imperial";
@@ -55,6 +51,8 @@ var getHourly = function (lat, lon, trName) {
 
         // This loop gets the hourly forecast for each hour
         // At the end of each loop the information is logged
+        var weatherHeadingEl = document.getElementById("weather-info");
+        weatherHeadingEl.textContent = trName + " forecast:"
         for (var i = 0; i < hourlyForecast.length; ++i) {
           var forecastHour = currentDate.add(i, "hour").format("h A");
           var forecastCondition = hourlyForecast[i].weather[0].description;
@@ -64,31 +62,31 @@ var getHourly = function (lat, lon, trName) {
            let byHour=i;
            if(byHour===0){
             var spanEl= document.getElementById("bx1");
-            spanEl.textContent=trName +' at: '+forecastHour + '... '+ forecastCondition;
+            spanEl.textContent='At '+forecastHour + ' expect '+ forecastCondition + ".";
            }else if(byHour===1){
             var spanEl2= document.getElementById("bx2");
-            spanEl2.textContent=trName +' at: '+forecastHour + '... '+ forecastCondition;
+            spanEl2.textContent='At '+forecastHour + ' expect '+ forecastCondition + ".";
            }else if(byHour===2){
             var spanEl3= document.getElementById("bx3");
-            spanEl3.textContent=trName +' at: '+forecastHour + '... '+ forecastCondition;
+            spanEl3.textContent='At '+forecastHour + ' expect '+ forecastCondition + ".";
            }
            else if(byHour===3){
             var spanEl4= document.getElementById("bx4");
-            spanEl4.textContent=trName +' at: '+forecastHour + '... '+ forecastCondition;
+            spanEl4.textContent='At '+forecastHour + ' expect '+ forecastCondition + ".";
            }else if(byHour===4){
             var spanEl5= document.getElementById("bx5");
-            spanEl5.textContent=trName +' at: '+forecastHour + '... '+ forecastCondition;
+            spanEl5.textContent='At '+forecastHour + ' expect '+ forecastCondition + ".";
            }
            else if(byHour===5){
             var spanEl6= document.getElementById("bx6");
-            spanEl6.textContent=trName +' at: '+forecastHour + '... '+ forecastCondition;
+            spanEl6.textContent='At '+forecastHour + ' expect '+ forecastCondition + ".";
            }else if(byHour===6){
             var spanEl7= document.getElementById("bx7");
-            spanEl7.textContent=trName +' at: '+forecastHour + '... '+ forecastCondition;
+            spanEl7.textContent='At '+forecastHour + ' expect '+ forecastCondition + ".";
            }
            else if(byHour===7){
             var spanEl8= document.getElementById("bx8");
-            spanEl8.textContent=trName +' at: '+forecastHour + '... '+ forecastCondition;
+            spanEl8.textContent='At '+forecastHour + ' expect '+ forecastCondition + ".";
            }else {
                console.error("something went wrong!");
            }
@@ -254,5 +252,16 @@ var getLocationData = function (searchLocation) {
     }
   });
 };
+
+var locationSubmitHandler = function(event) {
+    event.preventDefault();
+    console.log("I was submitted!");
+    var searchLocation = searchInput.value;
+    getLocationData(searchLocation);
+    console.log(searchLocation);
+  };
+
+searchContainerEl.addEventListener("submit", locationSubmitHandler);
+
 
 getUserLocation();

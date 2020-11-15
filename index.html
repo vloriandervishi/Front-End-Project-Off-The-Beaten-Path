@@ -20,37 +20,33 @@
       <!-- hero/jumbotron -->
       <section class="hero is-medium">
         <div class="hero-body">
-          <div class="field is-flex">
-            <label for="trail" class="has-text-white"
-              >Search a location:
-            </label>
+          <form class="field is-flex" id="searchContainer">
             <input
               type="text"
               name="trailName"
               id="trail-input-name"
-              value='knoxville'
               placeholder="Search a Location"
               class="input is-medium is-danger"
             />
             <button id="submit" class="button is-medium is-dark" type="submit">
               Submit
             </button>
-          </div>
+          </form>
         </div>
       </section>
       <div>
         <div class="columns has-border">
           <!-- Trail Info-list -->
           <section class="column is-half">
-            <h2 class="title has-text-white has-text-centered">Trail Info:</h2>
+            <h2 class="title has-text-white has-text-centered" id="trail-info">Trail Info:</h2>
             <div id="info-wrapper">
               <div class="box" id="infoBox"></div>
             </div>
           </section>
           <!-- Weather Data -->
           <section class="column is-one-third">
-            <h2 class="title has-text-centered has-text-white">
-              Weather Data:
+            <h2 class="title has-text-centered has-text-white" id='weather-info'>
+              Forecast:
             </h2>
             <div class="rows has-text-white" id="weather-wrapper">
               <!-- CityNme Display  -->
