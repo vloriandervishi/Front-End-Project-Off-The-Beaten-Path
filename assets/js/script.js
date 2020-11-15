@@ -1,7 +1,14 @@
 var appId = "af9ded99d1790eca45328d602b9e06d9";
 // searchLocation is a temporary variable that needs to be removed once the search submission is set up
 // after search submission is set up, searchLocation needs to be moved to the inside of the search listener/handler
-var searchLocation = "Knoxville";
+var searchInput = document.getElementById("trail-input-name");
+var submit = document.getElementById("submit");
+submit.addEventListener("click", function () {
+  var searchLocation = searchInput.value;
+  getLocationData(searchLocation);
+  console.log(searchLocation);
+});
+
 // units sets the input format from OpenWeather, in case we decide to pull a temp or something like that
 var units = "imperial";
 
@@ -10,7 +17,7 @@ var userCoordinates = "";
 function getUserLocation() {
   if (navigator.geolocation) {
     var userLocation = navigator.geolocation.getCurrentPosition(showPosition);
-    console.log('userLocation: ', userLocation);
+    console.log("userLocation: ", userLocation);
     console.log(userLocation);
   } else {
     alert("Geolocation is not supported by this browser.");
@@ -42,21 +49,25 @@ var getHourly = function (lat, lon, trName) {
         hourlyForecast.splice(8);
         // This gets the current time hour
         var currentDate = dayjs();
-      
+
         // var currentHour = parseInt(currentDate.format("h"));
         // var amPm = currentDate.format("A");
-        
+
         // This loop gets the hourly forecast for each hour
         // At the end of each loop the information is logged
         for (var i = 0; i < hourlyForecast.length; ++i) {
-            var forecastHour = currentDate.add(i, "hour").format("h A");
+          var forecastHour = currentDate.add(i, "hour").format("h A");
           var forecastCondition = hourlyForecast[i].weather[0].description;
           if (forecastCondition === "clear sky") {
             forecastCondition = "clear skies";
           }
 
           // This is what needs to display to the page, preferably only after the user clicks on a trail
-          console.log(forecastHour)
+          console.log(forecastHour);
+          var spanEl=document.querySelector('span');
+          var frEl=document.createElement('span');
+          frEl.textContent=forecastHour;
+          spanEl.append(frEl);
           console.log("Forecast calls for " + forecastCondition + ".");
         }
       });
@@ -126,58 +137,84 @@ var getLocationData = function (searchLocation) {
                   "Unable to find any hiking trails within 50 miles of the location you searched."
                 );
               } else {
-                for (var i = 0; i < data.trails.length; ++i) {
-                  // This gets the difficulty rating
-                  difficultySet(data.trails[i].difficulty);
-                  // This gets the trail ID that is used to get more information from Hiking Project
-                  var trId = data.trails[i].id;
-                  // These get the trail latitude and longitude for the directions and hourly forecast
-                  var trLat = data.trails[i].latitude;
-                  var trLon = data.trails[i].longitude;
-                  // This gets the trail name
-                  var trName = data.trails[i].name;
-                  // This gets the trail description
-                  var trSummary = data.trails[i].summary;
-                  // This gets the trail condition (dry, muddy, etc.)
-                  var trCondition = data.trails[i].conditionDetails;
-                  if (!trCondition) {
-                    trCondition =
-                      "No condition information has been provided for this trail yet.";
-                  }
-
-                  if (trSummary === "Needs Summary") {
-                    trSummary =
-                      "No description has been provided for this trail yet.";
-                  }
-                  // This builds a link from the userCoordinates and the trail coordinates to get directions
-                  var directions =
-                    "https://google.com/maps/dir/" +
-                    userCoordinates +
-                    "/" +
-                    trLat +
-                    "+" +
-                    trLon;
-                  // This uses the trail ID to link to more information about the trail on Hiking Project's website
-                  var moreInformation =
-                    "https://www.hikingproject.com/trail/" + trId;
-                  // These Logs represent the information that should be displayed to the page under the Trail Info List
-                  // For each Trail, there should be a new div list item with the following as textContent
-                  console.log(trName);
-                  console.log("Lat: " + trLat, "Lon: " + trLon);
-                  console.log(trSummary);
-                  console.log("Trail condition: " + trCondition);
-                  console.log("Difficulty: " + trDifficulty);
-                  console.log(directions);
-                  console.log(moreInformation);
-
-                  // This calls the Hourly Forecast using the latitude and longitude for the trail.
-                  // It also passes in the trail name for easier access.
-                  // Right now getHourly is called every time you run a search,
-                  // but it would be better if the search only ran when the trail info is clicked
-                  // To do that, I think we will need a listener for a click on the trail div
-                  // This can be done easily with jQuery
-                  getHourly(trLat, trLon, trName);
+                //  for (var i = 0; i < data.trails.length; ++i) {
+                // This gets the difficulty rating
+                difficultySet(data.trails[0].difficulty);
+                // This gets the trail ID that is used to get more information from Hiking Project
+                var trId = data.trails[0].id;
+                // These get the trail latitude and longitude for the directions and hourly forecast
+                var trLat = data.trails[0].latitude;
+                var trLon = data.trails[0].longitude;
+                // This gets the trail name
+                var trName = data.trails[0].name;
+                // This gets the trail description
+                var trSummary = data.trails[0].summary;
+                // This gets the trail condition (dry, muddy, etc.)
+                var trCondition = data.trails[0].conditionDetails;
+                if (!trCondition) {
+                  trCondition =
+                    "No condition information has been provided for this trail yet.";
                 }
+
+                if (trSummary === "Needs Summary") {
+                  trSummary =
+                    "No description has been provided for this trail yet.";
+                }
+                // This builds a link from the userCoordinates and the trail coordinates to get directions
+                var directions =
+                  "https://google.com/maps/dir/" +
+                  userCoordinates +
+                  "/" +
+                  trLat +
+                  "+" +
+                  trLon;
+                // This uses the trail ID to link to more information about the trail on Hiking Project's website
+                var moreInformation =
+                  "https://www.hikingproject.com/trail/" + trId;
+                // These Logs represent the information that should be displayed to the page under the Trail Info List
+                // For each Trail, there should be a new div list item with the following as textContent
+               // console.log(trName);
+                var ulEl = document.createElement("ul");
+                var liEl = document.createElement("li");
+                liEl.textContent = resultPlaceName;
+                var trliEl = document.createElement("li");
+                trliEl.textContent = trName;
+                
+               // console.log("Lat: " + trLat, "Lon: " + trLon);
+                var latliEl=document.createElement('li');
+                var trSliEl=document.createElement('li');
+                trSliEl.textContent=trSummary;
+                latliEl.textContent="Lat: " + trLat + " Lon: " + trLon;
+                //console.log(trSummary);
+                
+               
+                var trliEl=document.createElement('li');
+                trliEl.textContent="Trail condition: " + trCondition;
+              //  console.log("Trail condition: " + trCondition);
+                var trdliEl=document.createElement('li');
+                trdliEl.textContent="Difficulty: " + trDifficulty;
+               // console.log("Difficulty: " + trDifficulty);
+
+                var direliEl=document.createElement('li');
+
+                direliEl.textContent=directions;
+              //  console.log(directions);
+                var infoliEl=document.createElement('li');
+                infoliEl.textContent=moreInformation;
+              //  console.log(moreInformation);
+                var wrapPer = document.querySelector("#infoBox");
+               
+                ulEl.append(liEl,trSliEl, trliEl,latliEl,trliEl,trdliEl,direliEl,infoliEl);
+                wrapPer.append(ulEl);
+
+                // This calls the Hourly Forecast using the latitude and longitude for the trail.
+                // It also passes in the trail name for easier access.
+                // Right now getHourly is called every time you run a search,
+                // but it would be better if the search only ran when the trail info is clicked
+                // To do that, I think we will need a listener for a click on the trail div
+                // This can be done easily with jQuery
+                getHourly(trLat, trLon, trName);
+                // }
               }
             });
           }
@@ -192,4 +229,3 @@ var getLocationData = function (searchLocation) {
 };
 
 getUserLocation();
-getLocationData(searchLocation);
