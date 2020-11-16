@@ -19,3 +19,7 @@
 #trail-info-section a {
     text-decoration: underline;
 }
+
+#historyContainer .search-history {
+    width: 50%;
+}
