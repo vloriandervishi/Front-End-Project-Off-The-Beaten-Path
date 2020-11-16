@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  background-image: url(../Images/Hike\ 1.jpg);
+  background-image: url(../Images/6965053824_3865b1a920_o.jpg);
   background-size: cover;
   background-position: 80%;
   align-items: flex-start;
@@ -20,6 +20,13 @@
     text-decoration: underline;
 }
 
-#historyContainer .search-history {
+/*#historyContainer .search-history {
     width: 50%;
+}*/
+header {
+  padding: 10px;
+  background-image: linear-gradient(to bottom right, rgb(26, 26, 26), rgb(54, 54, 54), rgb(204, 15, 53)););
+}
+.box {
+  width: 90%;
 }

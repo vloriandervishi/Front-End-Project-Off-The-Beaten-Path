@@ -7,6 +7,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
     />
+    <script src="https://kit.fontawesome.com/5f706452ba.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Off the Beaten Path</title>
   </head>
@@ -15,20 +16,25 @@
       <header>
         <h1 class="title is-strong is-1 has-text-centered has-text-danger-dark">
           Off The Beaten Path
+          <span class="icon is-large">
+            <img src="./assets/Images/Off The Beaten Path SVG With Mountains and Background layer.svg"/>
+          </span>
         </h1>
       </header>
       <!-- hero/jumbotron -->
       <section class="hero is-medium">
+        <figure class="image is-64x64">
+        </figure>
         <div class="hero-body">
           
         </div>
       </section>
-      <div>
+      <div class="is-justify-content-center">
         <div class="columns has-border">
           <!-- Search History -->
           <section class="column is-one-fifth">
-            <nav class="panel has-background-light">
-                <h2 class="panel-heading has-text-centered">
+            <nav class="panel has-background-danger-dark">
+                <h2 class="panel-heading has-text-centered has-text-white has-background-dark">
                 Search a Location
                 </h2>
                 <div class="panel-block" >
@@ -38,35 +44,20 @@
                       name="trailName"
                       id="trail-input-name"
                       placeholder="Search a Location"
-                      class="input is-medium is-danger"
+                      class="input is-danger"
                     />
-                    <button id="submit" class="button is-medium is-dark" type="submit">
-                      Submit
+                    <button id="submit" class="button is-dark" type="submit">
+                      <span>
+                        <i class="fas fa-search"></i>
+                      </span>
                     </button>
                   </form>
                 </div>
                 <p class="panel-tabs">
-                <a class="is-active">All</a>
-                <a>Search History</a>
-                <a>Favorites</a>
+                Search History
                 </p>
-                <div id="historyContainer">
-                <!-- Sample of favorites or search history-->
-                <a class="panel-block is-active">
-                <span class="panel-icon">
-                    <i class="fas fa-book" aria-hidden="true"></i>
-                </span>
-                </a>
+                <div class="is-justified-center" id="historyContainer">
               </div>
-                <label class="panel-block">
-                <input type="checkbox">
-                remember me
-                </label>
-                <div class="panel-block">
-                <button class="button is-link is-outlined is-fullwidth">
-                    Reset all filters
-                </button>
-                </div>
             </nav>
         </section>
           <!-- Trail Info-list -->

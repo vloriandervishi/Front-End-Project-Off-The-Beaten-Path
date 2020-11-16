@@ -54,7 +54,7 @@ var getHourly = function (lat, lon, trName) {
         // This loop gets the hourly forecast for each hour
         // At the end of each loop the information is logged
         var weatherHeadingEl = document.getElementById("weather-info");
-        weatherHeadingEl.textContent = trName + " forecast:"
+        weatherHeadingEl.textContent = trName + " Forecast:"
         for (var i = 0; i < hourlyForecast.length; ++i) {
           var forecastHour = currentDate.add(i, "hour").format("h A");
           var forecastCondition = hourlyForecast[i].weather[0].description;
@@ -160,7 +160,7 @@ var getLocationData = function (searchLocation) {
         // This resultPlacename should be displayed at the top of the trail info list
         // It can take the place of the textContent of the h2 that says "Trail Info:"
         var trailHeadingEl = document.getElementById("trail-info");
-        trailHeadingEl.textContent = resultPlaceName + " trail info:";
+        trailHeadingEl.textContent = resultPlaceName + " Trail Info:";
         updateHistory(resultPlaceName);
         console.log(resultPlaceName);
 
@@ -288,7 +288,7 @@ var loadHistory = function() {
       for (var i = 0; i < locationHistory.length; ++i) {
           var historyEl = document.createElement("button");
           historyEl.textContent = locationHistory[i];
-          historyEl.classList = "search-history is-clipped has-background-danger-dark has-text-white has-text-left";
+          historyEl.classList = "box is-fullwidth is-medium search-history is-clipped has-background-dark has-text-white has-text-left";
           $("#historyContainer").append(historyEl);
       }
   }    
