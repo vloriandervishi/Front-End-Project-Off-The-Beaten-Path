@@ -1,4 +1,5 @@
 var appId = "af9ded99d1790eca45328d602b9e06d9";
+var locationHistory = [];
 // searchLocation is a temporary variable that needs to be removed once the search submission is set up
 // after search submission is set up, searchLocation needs to be moved to the inside of the search listener/handler
 var searchInput = document.getElementById("trail-input-name");
@@ -141,16 +142,26 @@ var getLocationData = function (searchLocation) {
         // This retrieves the Lat, Lon, and Place name for the user's search
         var lat = data.results[0].position.lat;
         var lon = data.results[0].position.lon;
-        var resultPlaceName =
+        var resultPlaceName = "";
+        if (data.results[0].address.municipality) {
+          resultPlaceName = resultPlaceName +
           data.results[0].address.municipality +
-          ", " +
-          data.results[0].address.countrySubdivision +
-          ", " +
+          " ";
+        }
+        if (data.results[0].address.countrySubdivision) {
+          resultPlaceName = resultPlaceName + 
+          data.results[0].address.countrySubdivision + 
+          " ";
+        }      
+        if (data.results[0].address.countryCode) {
+          resultPlaceName = resultPlaceName +
           data.results[0].address.countryCode;
+        }
         // This resultPlacename should be displayed at the top of the trail info list
         // It can take the place of the textContent of the h2 that says "Trail Info:"
         var trailHeadingEl = document.getElementById("trail-info");
-        trailHeadingEl.textContent = resultPlaceName + " trail info:"
+        trailHeadingEl.textContent = resultPlaceName + " trail info:";
+        updateHistory(resultPlaceName);
         console.log(resultPlaceName);
 
         // This is the API call to Hiking Project
@@ -164,9 +175,12 @@ var getLocationData = function (searchLocation) {
           if (response.ok) {
             response.json().then(function (data) {
               if (data.trails.length === 0) {
-                console.log(
-                  "Unable to find any hiking trails within 50 miles of the location you searched."
-                );
+                var trailDivEl = document.createElement("div");
+                trailDivEl.classList ="trailDiv box has-background-danger-dark has-text-white";
+                var noTrailsEl = document.createElement("p")
+                noTrailsEl.textContent = "Unable to find any hiking trails within 50 miles of the location you searched."
+                trailDivEl.append(noTrailsEl);
+                trailSectionEl.append(trailDivEl);
               } else {
                  for (var i = 0; i < data.trails.length; ++i) {
                 // This gets the difficulty rating
@@ -230,10 +244,10 @@ var getLocationData = function (searchLocation) {
 
                 var direliEl=document.createElement('li');
 
-                direliEl.innerHTML = "<a href='" + directions + "' target='_blank'>Directions</a>";
+                direliEl.innerHTML = "<a href='" + directions + "' target='_blank' class='has-text-dark has-text-weight-bold'>Directions</a>";
               //  console.log(directions);
                 var infoliEl=document.createElement('li');
-                infoliEl.innerHTML = "<a href='" + moreInformation + "' target='_blank'>More Information</a>";
+                infoliEl.innerHTML = "<a href='" + moreInformation + "' target='_blank' class='has-text-dark has-text-weight-bold'>More Information</a>";
               //  console.log(moreInformation);
                 
                
@@ -241,32 +255,74 @@ var getLocationData = function (searchLocation) {
                 trailDivEl.append(ulEl);
                 trailSectionEl.append(trailDivEl);
               }
-                // This calls the Hourly Forecast using the latitude and longitude for the trail.
-                // It also passes in the trail name for easier access.
-                // Right now getHourly is called every time you run a search,
-                // but it would be better if the search only ran when the trail info is clicked
-                // To do that, I think we will need a listener for a click on the trail div
-                // This can be done easily with jQuery
-                
-                // }
               }
             });
           }
         });
       });
     } else {
-      alert(
-        "Unable to display information for that location. Make sure it is spelled correctly."
-      );
+      var trailDivEl = document.createElement("div");
+                trailDivEl.classList ="trailDiv box has-background-danger-dark has-text-white";
+                var noTrailsEl = document.createElement("p")
+                noTrailsEl.textContent = "We are having trouble displaying information for that location. Check your internect connection and please try again."
+                trailDivEl.append(noTrailsEl);
+                trailSectionEl.append(trailDivEl);
     }
   });
 };
 
+
+var getPrevious = function(){
+  var historySearch = $(this).text().trim();
+  getLocationData(historySearch);
+};
+
+var loadHistory = function() {
+  locationHistory = localStorage.getItem("hikingLocationHistory");
+  locationHistory = JSON.parse(locationHistory);
+  if (!locationHistory) {
+      locationHistory = [];
+      return;
+  } 
+  else { 
+      for (var i = 0; i < locationHistory.length; ++i) {
+          var historyEl = document.createElement("p");
+          historyEl.textContent = locationHistory[i];
+          historyEl.classList = "search-history button is-clipped has-background-danger-dark has-text-white";
+          $("#historyContainer").append(historyEl);
+      }
+  }    
+
+};
+
+var updateHistory = function(resultPlaceName){
+  if (locationHistory.includes(resultPlaceName)){
+      return;
+  }
+  else {
+      locationHistory.push(resultPlaceName);
+      
+      if (locationHistory.length > 8) {
+          locationHistory.shift();
+      }
+      localStorage.setItem("hikingLocationHistory", JSON.stringify(locationHistory));
+      // this clears the search history deck so it can be repopulated with the updated list in loadHistory
+      $(".search-history").each(function(){
+          $(this).remove();
+      });
+      loadHistory();
+  }
+};
+
 var locationSubmitHandler = function(event) {
     event.preventDefault();
-    console.log("I was submitted!");
     var searchLocation = searchInput.value;
     getLocationData(searchLocation);
+    searchInput.value = "Searching...";
+    setTimeout(function() {
+      searchInput.value = "";
+    }, 1600);
+   
     console.log(searchLocation);
   };
 
@@ -281,6 +337,10 @@ $("#trail-info-section").on("click", "div", function(){
   var thisTrLon= $(this).find("#thisTrLon").text();
   console.log(thisTrLon);
   getHourly(thisTrLat, thisTrLon, thisTrName);
+  window.location = '#weather-info';
 });
 
+$("#historyContainer").on("click", ".search-history", getPrevious);
+
 getUserLocation();
+loadHistory();

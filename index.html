@@ -39,6 +39,11 @@
           <!-- Trail Info-list -->
           <section class="column is-half" id="trail-info-section">
             <h2 class="title has-text-white has-text-centered" id="trail-info">Trail Info:</h2>
+            <div class="trailDiv box has-background-danger-dark has-text-white">
+              <p>This app will retrieve information on hiking trails within 50 miles of your location, if there are any in the area. 
+                For best results, search a city/town name or an address. 
+                Allow location services so we can provide you with directions to your desired trail.</p>
+            </div>
             </section>
           <!-- Weather Data -->
           <section class="column is-one-quarter">
@@ -48,7 +53,7 @@
             <div class="rows has-text-white" id="weather-wrapper">
               <!-- CityNme Display  -->
               <div class="box">
-                <span id="bx1"></span>
+                <span id="bx1">Click on a trails info box to see that trail's weather forecast for the next 8 hours.</span>
               </div>
               <div class="box">
                 <span id="bx2"></span>
@@ -74,7 +79,7 @@
             </div>
           </section>
           <!-- Search History -->
-          <section class="column is-one-fifth">
+          <section class="column is-one-fifth" id="historyContainer">
             <h2 class="title has-text-white has-text-centered">
               Search History:
             </h2>

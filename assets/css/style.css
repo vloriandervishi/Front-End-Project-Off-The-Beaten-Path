@@ -11,3 +11,11 @@
 #infoBox {
   width: 100%;
 }
+
+.trailDiv:hover {
+    box-shadow: 0 0 5px rgb(255, 255, 255);;
+}
+
+#trail-info-section a {
+    text-decoration: underline;
+}
