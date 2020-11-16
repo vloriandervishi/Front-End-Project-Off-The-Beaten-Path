@@ -1,13 +1,11 @@
 var appId = "af9ded99d1790eca45328d602b9e06d9";
+var locationHistory = [];
 // searchLocation is a temporary variable that needs to be removed once the search submission is set up
 // after search submission is set up, searchLocation needs to be moved to the inside of the search listener/handler
 var searchInput = document.getElementById("trail-input-name");
-var submit = document.getElementById("submit");
-submit.addEventListener("click", function () {
-  var searchLocation = searchInput.value;
-  getLocationData(searchLocation);
-  console.log(searchLocation);
-});
+var searchContainerEl = document.getElementById("searchContainer");
+var trailSectionEl = document.querySelector("#trail-info-section");
+
 
 // units sets the input format from OpenWeather, in case we decide to pull a temp or something like that
 var units = "imperial";
@@ -55,19 +53,48 @@ var getHourly = function (lat, lon, trName) {
 
         // This loop gets the hourly forecast for each hour
         // At the end of each loop the information is logged
+        var weatherHeadingEl = document.getElementById("weather-info");
+        weatherHeadingEl.textContent = trName + " forecast:"
         for (var i = 0; i < hourlyForecast.length; ++i) {
           var forecastHour = currentDate.add(i, "hour").format("h A");
           var forecastCondition = hourlyForecast[i].weather[0].description;
           if (forecastCondition === "clear sky") {
             forecastCondition = "clear skies";
           }
-
+           let byHour=i;
+           if(byHour===0){
+            var spanEl= document.getElementById("bx1");
+            spanEl.textContent='At '+forecastHour + ' expect '+ forecastCondition + ".";
+           }else if(byHour===1){
+            var spanEl2= document.getElementById("bx2");
+            spanEl2.textContent='At '+forecastHour + ' expect '+ forecastCondition + ".";
+           }else if(byHour===2){
+            var spanEl3= document.getElementById("bx3");
+            spanEl3.textContent='At '+forecastHour + ' expect '+ forecastCondition + ".";
+           }
+           else if(byHour===3){
+            var spanEl4= document.getElementById("bx4");
+            spanEl4.textContent='At '+forecastHour + ' expect '+ forecastCondition + ".";
+           }else if(byHour===4){
+            var spanEl5= document.getElementById("bx5");
+            spanEl5.textContent='At '+forecastHour + ' expect '+ forecastCondition + ".";
+           }
+           else if(byHour===5){
+            var spanEl6= document.getElementById("bx6");
+            spanEl6.textContent='At '+forecastHour + ' expect '+ forecastCondition + ".";
+           }else if(byHour===6){
+            var spanEl7= document.getElementById("bx7");
+            spanEl7.textContent='At '+forecastHour + ' expect '+ forecastCondition + ".";
+           }
+           else if(byHour===7){
+            var spanEl8= document.getElementById("bx8");
+            spanEl8.textContent='At '+forecastHour + ' expect '+ forecastCondition + ".";
+           }else {
+               console.error("something went wrong!");
+           }
           // This is what needs to display to the page, preferably only after the user clicks on a trail
           console.log(forecastHour);
-          var spanEl=document.querySelector('span');
-          var frEl=document.createElement('span');
-          frEl.textContent=forecastHour;
-          spanEl.append(frEl);
+        
           console.log("Forecast calls for " + forecastCondition + ".");
         }
       });
@@ -100,6 +127,9 @@ var difficultySet = function (dataSet) {
 
 // This is the function that gets the Location data the first call is to TomTom
 var getLocationData = function (searchLocation) {
+  $(".trailDiv").each(function(){
+    $(this).remove();
+  })
   fetch(
     "https://api.tomtom.com/search/2/geocode/" +
       searchLocation +
@@ -112,14 +142,26 @@ var getLocationData = function (searchLocation) {
         // This retrieves the Lat, Lon, and Place name for the user's search
         var lat = data.results[0].position.lat;
         var lon = data.results[0].position.lon;
-        var resultPlaceName =
+        var resultPlaceName = "";
+        if (data.results[0].address.municipality) {
+          resultPlaceName = resultPlaceName +
           data.results[0].address.municipality +
-          ", " +
-          data.results[0].address.countrySubdivision +
-          ", " +
+          " ";
+        }
+        if (data.results[0].address.countrySubdivision) {
+          resultPlaceName = resultPlaceName + 
+          data.results[0].address.countrySubdivision + 
+          " ";
+        }      
+        if (data.results[0].address.countryCode) {
+          resultPlaceName = resultPlaceName +
           data.results[0].address.countryCode;
+        }
         // This resultPlacename should be displayed at the top of the trail info list
         // It can take the place of the textContent of the h2 that says "Trail Info:"
+        var trailHeadingEl = document.getElementById("trail-info");
+        trailHeadingEl.textContent = resultPlaceName + " trail info:";
+        updateHistory(resultPlaceName);
         console.log(resultPlaceName);
 
         // This is the API call to Hiking Project
@@ -133,24 +175,27 @@ var getLocationData = function (searchLocation) {
           if (response.ok) {
             response.json().then(function (data) {
               if (data.trails.length === 0) {
-                console.log(
-                  "Unable to find any hiking trails within 50 miles of the location you searched."
-                );
+                var trailDivEl = document.createElement("div");
+                trailDivEl.classList ="trailDiv box has-background-danger-dark has-text-white";
+                var noTrailsEl = document.createElement("p")
+                noTrailsEl.textContent = "Unable to find any hiking trails within 50 miles of the location you searched."
+                trailDivEl.append(noTrailsEl);
+                trailSectionEl.append(trailDivEl);
               } else {
-                //  for (var i = 0; i < data.trails.length; ++i) {
+                 for (var i = 0; i < data.trails.length; ++i) {
                 // This gets the difficulty rating
-                difficultySet(data.trails[0].difficulty);
+                difficultySet(data.trails[i].difficulty);
                 // This gets the trail ID that is used to get more information from Hiking Project
-                var trId = data.trails[0].id;
+                var trId = data.trails[i].id;
                 // These get the trail latitude and longitude for the directions and hourly forecast
-                var trLat = data.trails[0].latitude;
-                var trLon = data.trails[0].longitude;
+                var trLat = data.trails[i].latitude;
+                var trLon = data.trails[i].longitude;
                 // This gets the trail name
-                var trName = data.trails[0].name;
+                var trName = data.trails[i].name;
                 // This gets the trail description
-                var trSummary = data.trails[0].summary;
+                var trSummary = data.trails[i].summary;
                 // This gets the trail condition (dry, muddy, etc.)
-                var trCondition = data.trails[0].conditionDetails;
+                var trCondition = data.trails[i].conditionDetails;
                 if (!trCondition) {
                   trCondition =
                     "No condition information has been provided for this trail yet.";
@@ -174,9 +219,11 @@ var getLocationData = function (searchLocation) {
                 // These Logs represent the information that should be displayed to the page under the Trail Info List
                 // For each Trail, there should be a new div list item with the following as textContent
                // console.log(trName);
+                var trailDivEl = document.createElement("div");
+                trailDivEl.classList ="trailDiv box has-background-danger-dark has-text-white";
                 var ulEl = document.createElement("ul");
                 var liEl = document.createElement("li");
-                liEl.textContent = resultPlaceName;
+                liEl.innerHTML ="<span id='thisTrName'>" + trName + "</span>";
                 var trliEl = document.createElement("li");
                 trliEl.textContent = trName;
                 
@@ -184,7 +231,7 @@ var getLocationData = function (searchLocation) {
                 var latliEl=document.createElement('li');
                 var trSliEl=document.createElement('li');
                 trSliEl.textContent=trSummary;
-                latliEl.textContent="Lat: " + trLat + " Lon: " + trLon;
+                latliEl.innerHTML="Lat: <span id='thisTrLat'>" + trLat + "</span> Lon: <span id='thisTrLon'>" + trLon + "</span>";
                 //console.log(trSummary);
                 
                
@@ -197,35 +244,103 @@ var getLocationData = function (searchLocation) {
 
                 var direliEl=document.createElement('li');
 
-                direliEl.textContent=directions;
+                direliEl.innerHTML = "<a href='" + directions + "' target='_blank' class='has-text-dark has-text-weight-bold'>Directions</a>";
               //  console.log(directions);
                 var infoliEl=document.createElement('li');
-                infoliEl.textContent=moreInformation;
-              //  console.log(moreInformation);
-                var wrapPer = document.querySelector("#infoBox");
+                infoliEl.innerHTML = "<a href='" + moreInformation + "' target='_blank' class='has-text-dark has-text-weight-bold'>More Information</a>";
+              //  console.log(moreInformation);          
                
                 ulEl.append(liEl,trSliEl, trliEl,latliEl,trliEl,trdliEl,direliEl,infoliEl);
-                wrapPer.append(ulEl);
-
-                // This calls the Hourly Forecast using the latitude and longitude for the trail.
-                // It also passes in the trail name for easier access.
-                // Right now getHourly is called every time you run a search,
-                // but it would be better if the search only ran when the trail info is clicked
-                // To do that, I think we will need a listener for a click on the trail div
-                // This can be done easily with jQuery
-                getHourly(trLat, trLon, trName);
-                // }
+                trailDivEl.append(ulEl);
+                trailSectionEl.append(trailDivEl);
+              }
               }
             });
           }
         });
       });
     } else {
-      alert(
-        "Unable to display information for that location. Make sure it is spelled correctly."
-      );
+      var trailDivEl = document.createElement("div");
+                trailDivEl.classList ="trailDiv box has-background-danger-dark has-text-white";
+                var noTrailsEl = document.createElement("p")
+                noTrailsEl.textContent = "We are having trouble displaying information for that location. Check your internect connection and please try again."
+                trailDivEl.append(noTrailsEl);
+                trailSectionEl.append(trailDivEl);
     }
   });
 };
 
+
+var getPrevious = function(){
+  var historySearch = $(this).text().trim();
+  getLocationData(historySearch);
+};
+
+var loadHistory = function() {
+  locationHistory = localStorage.getItem("hikingLocationHistory");
+  locationHistory = JSON.parse(locationHistory);
+  if (!locationHistory) {
+      locationHistory = [];
+      return;
+  } 
+  else { 
+    // This creates the search history elements
+      for (var i = 0; i < locationHistory.length; ++i) {
+          var historyEl = document.createElement("button");
+          historyEl.textContent = locationHistory[i];
+          historyEl.classList = "search-history is-clipped has-background-danger-dark has-text-white has-text-left";
+          $("#historyContainer").append(historyEl);
+      }
+  }    
+
+};
+
+var updateHistory = function(resultPlaceName){
+  if (locationHistory.includes(resultPlaceName)){
+      return;
+  }
+  else {
+      locationHistory.push(resultPlaceName);
+      
+      if (locationHistory.length > 8) {
+          locationHistory.shift();
+      }
+      localStorage.setItem("hikingLocationHistory", JSON.stringify(locationHistory));
+      // this clears the search history deck so it can be repopulated with the updated list in loadHistory
+      $(".search-history").each(function(){
+          $(this).remove();
+      });
+      loadHistory();
+  }
+};
+
+var locationSubmitHandler = function(event) {
+    event.preventDefault();
+    var searchLocation = searchInput.value;
+    getLocationData(searchLocation);
+    searchInput.value = "Searching...";
+    setTimeout(function() {
+      searchInput.value = "";
+    }, 1600);
+   
+    console.log(searchLocation);
+  };
+
+
+searchContainerEl.addEventListener("submit", locationSubmitHandler);
+
+$("#trail-info-section").on("click", "div", function(){
+  var thisTrName = $(this).find("#thisTrName").text();
+  console.log(thisTrName);
+  var thisTrLat= $(this).find("#thisTrLat").text();
+  console.log(thisTrLat);
+  var thisTrLon= $(this).find("#thisTrLon").text();
+  console.log(thisTrLon);
+  getHourly(thisTrLat, thisTrLon, thisTrName);
+  window.location = '#weather-info';
+});
+
+$("#historyContainer").on("click", ".search-history", getPrevious);
+
 getUserLocation();
+loadHistory();

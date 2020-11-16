@@ -1,109 +1,122 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-    <link rel="stylesheet" href="./assets/css/style.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Off the Beaten Path</title>
-</head>
-<body class="has-background-dark">
+  </head>
+  <body class="has-background-dark">
     <main>
-        <header>
-            <h1 class="title is-strong is-1 has-text-centered has-text-danger-dark">Off The Beaten Path</h1>
-        </header>
-        <!-- hero/jumbotron -->
-        <section class="hero is-medium">
-            <div class="hero-body">
-                <div class="field is-flex">
-                    <input type="text" name="trailName" id="trail-input-name" placeholder="Search a Location" class="input is-medium is-danger">
-                    <button class="button is-medium is-dark" type="submit">Submit</button>
-                </div>
-            </div>
-        </section>
-        <div>
-            <div class="columns has-border">
-                <!-- Search History -->
-                <section class="column is-one-fifth">
-                    <nav class="panel has-background-light">
-                        <h2 class="panel-heading has-text-centered">
-                        HISTORY
-                        </h2>
-                        <div class="panel-block">
-                        <p class="control has-icons-left">
-                            <input class="input" type="text" placeholder="Search">
-                            <span class="icon is-left">
-                            <i class="fas fa-search" aria-hidden="true"></i>
-                            </span>
-                        </p>
-                        </div>
-                        <p class="panel-tabs">
-                        <a class="is-active">All</a>
-                        <a>Search History</a>
-                        <a>Favorites</a>
-                        </p>
-                        <!-- Sample of favorites or search history-->
-                        <a class="panel-block is-active">
-                        <span class="panel-icon">
-                            <i class="fas fa-book" aria-hidden="true"></i>
-                        </span>
-                        sample
-                        </a>
-                        <label class="panel-block">
-                        <input type="checkbox">
-                        remember me
-                        </label>
-                        <div class="panel-block">
-                        <button class="button is-link is-outlined is-fullwidth">
-                            Reset all filters
-                        </button>
-                        </div>
-                    </nav>
-                </section>
-                <!-- Trail Info-list -->
-                <section class="column is-half">
-                    <h2 class="title has-text-white has-text-centered">Trail Info:</h2>
-                    <div id="info-wrapper">
-                        <p class="box"></p>
-                    </div>
-                </section>
-                <!-- Weather Data -->
-                <section class="column is-one-fourth">
-                    <h2 class="title has-text-centered has-text-white">Weather Data: </h2>
-                    <div class="rows has-text-white" id="weather-wrapper">
-                        <div class="box">
-                            <span></span>
-                        </div>
-                        <div class="box">
-                            <span></span>
-                        </div>
-                        <div class="box">
-                            <span></span>
-                        </div>
-                        <div class="box">
-                            <span></span>
-                        </div>
-                        <div class="box">
-                            <span></span>
-                        </div>
-                        <div class="box">
-                            <span></span>
-                        </div>
-                        <div class="box">
-                            <span></span>
-                        </div>
-                        <div class="box">
-                            <span></span>
-                        </div>
-                    </div>
-                </section>
-                
-            </div>
+      <header>
+        <h1 class="title is-strong is-1 has-text-centered has-text-danger-dark">
+          Off The Beaten Path
+        </h1>
+      </header>
+      <!-- hero/jumbotron -->
+      <section class="hero is-medium">
+        <div class="hero-body">
+          
         </div>
+      </section>
+      <div>
+        <div class="columns has-border">
+          <!-- Search History -->
+          <section class="column is-one-fifth">
+            <nav class="panel has-background-light">
+                <h2 class="panel-heading has-text-centered">
+                Search a Location
+                </h2>
+                <div class="panel-block" >
+                  <form class="field is-flex" id="searchContainer">
+                    <input
+                      type="text"
+                      name="trailName"
+                      id="trail-input-name"
+                      placeholder="Search a Location"
+                      class="input is-medium is-danger"
+                    />
+                    <button id="submit" class="button is-medium is-dark" type="submit">
+                      Submit
+                    </button>
+                  </form>
+                </div>
+                <p class="panel-tabs">
+                <a class="is-active">All</a>
+                <a>Search History</a>
+                <a>Favorites</a>
+                </p>
+                <div id="historyContainer">
+                <!-- Sample of favorites or search history-->
+                <a class="panel-block is-active">
+                <span class="panel-icon">
+                    <i class="fas fa-book" aria-hidden="true"></i>
+                </span>
+                </a>
+              </div>
+                <label class="panel-block">
+                <input type="checkbox">
+                remember me
+                </label>
+                <div class="panel-block">
+                <button class="button is-link is-outlined is-fullwidth">
+                    Reset all filters
+                </button>
+                </div>
+            </nav>
+        </section>
+          <!-- Trail Info-list -->
+          <section class="column is-half" id="trail-info-section">
+            <h2 class="title has-text-white has-text-centered" id="trail-info">Trail Info:</h2>
+            <div class="trailDiv box has-background-danger-dark has-text-white">
+              <p>This app will retrieve information on hiking trails within 50 miles of your location, if there are any in the area. 
+                For best results, search a city/town name or an address. 
+                Allow location services so we can provide you with directions to your desired trail.</p>
+            </div>
+            </section>
+          <!-- Weather Data -->
+          <section class="column is-one-quarter">
+            <h2 class="title has-text-centered has-text-white" id='weather-info'>
+              Forecast:
+            </h2>
+            <div class="rows has-text-white" id="weather-wrapper">
+              <!-- CityNme Display  -->
+              <div class="box">
+                <span id="bx1">Click on a trails info box to see that trail's weather forecast for the next 8 hours.</span>
+              </div>
+              <div class="box">
+                <span id="bx2"></span>
+              </div>
+              <div class="box">
+                <span id="bx3"></span>
+              </div>
+              <div class="box">
+                <span id="bx4"></span>
+              </div>
+              <div class="box">
+                <span id="bx5"></span>
+              </div>
+              <div class="box">
+                <span id="bx6"></span>
+              </div>
+              <div class="box">
+                <span id="bx7"></span>
+              </div>
+              <div class="box">
+                <span id="bx8"></span>
+              </div>
+            </div>
+          </section>          
+        </div>
+      </div>
     </main>
     <footer></footer>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.9.6/dayjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.9.6/dayjs.min.js" integrity="sha512-C2m821NxMpJ4Df47O4P/17VPqt0yiK10UmGl59/e5ynRRYiCSBvy0KHJjhp2XIjUJreuR+y3SIhVyiVilhCmcQ==" crossorigin="anonymous"></script>
     <script src="./assets/js/script.js"></script>
-</body>
+  </body>
 </html>
