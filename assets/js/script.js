@@ -129,6 +129,9 @@ var difficultySet = function (dataSet) {
 var getLocationData = function (searchLocation) {
   $(".trailDiv").each(function(){
     $(this).remove();
+  });
+  $(".topLink").each(function(){
+    $(this).remove();
   })
   fetch(
     "https://api.tomtom.com/search/2/geocode/" +
@@ -220,7 +223,7 @@ var getLocationData = function (searchLocation) {
                 // For each Trail, there should be a new div list item with the following as textContent
                // console.log(trName);
                 var trailDivEl = document.createElement("div");
-                trailDivEl.classList ="trailDiv box has-background-danger-dark has-text-white";
+                trailDivEl.classList ="trailDiv box has-background-danger-dark has-text-white mb-0";
                 var ulEl = document.createElement("ul");
                 var liEl = document.createElement("li");
                 liEl.innerHTML ="<span id='thisTrName'>" + trName + "</span>";
@@ -253,6 +256,14 @@ var getLocationData = function (searchLocation) {
                 ulEl.append(liEl,trSliEl, trliEl,latliEl,trliEl,trdliEl,direliEl,infoliEl);
                 trailDivEl.append(ulEl);
                 trailSectionEl.append(trailDivEl);
+                var topReturnContainer = document.createElement('div');
+                topReturnContainer.classList = "topLink has-text-right pr-6 mt-2 mb-3";
+                var topReturnEl = document.createElement('a');
+                topReturnEl.setAttribute("href", "#header")
+                topReturnEl.classList = "topLink has-text-link";
+                topReturnEl.textContent = "back to top";
+                topReturnContainer.append(topReturnEl);
+                trailSectionEl.append(topReturnContainer);
               }
               }
             });
@@ -274,6 +285,11 @@ var getLocationData = function (searchLocation) {
 var getPrevious = function(){
   var historySearch = $(this).text().trim();
   getLocationData(historySearch);
+  searchInput.value = "Searching...";
+    setTimeout(function() {
+      searchInput.value = "";
+      window.location = '#trail-info-section';
+    }, 1600);
 };
 
 var loadHistory = function() {
@@ -321,6 +337,7 @@ var locationSubmitHandler = function(event) {
     searchInput.value = "Searching...";
     setTimeout(function() {
       searchInput.value = "";
+      window.location = '#trail-info-section';
     }, 1600);
    
     console.log(searchLocation);
@@ -329,7 +346,7 @@ var locationSubmitHandler = function(event) {
 
 searchContainerEl.addEventListener("submit", locationSubmitHandler);
 
-$("#trail-info-section").on("click", "div", function(){
+$("#trail-info-section").on("click", ".trailDiv", function(){
   var thisTrName = $(this).find("#thisTrName").text();
   console.log(thisTrName);
   var thisTrLat= $(this).find("#thisTrLat").text();
