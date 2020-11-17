@@ -54,7 +54,11 @@ var getHourly = function (lat, lon, trName) {
         // This loop gets the hourly forecast for each hour
         // At the end of each loop the information is logged
         var weatherHeadingEl = document.getElementById("weather-info");
-        weatherHeadingEl.textContent = trName + " forecast:"
+        weatherHeadingEl.textContent = trName + " forecast:";
+        var trailReturnLink = document.getElementById("backToTrail");
+        trailReturnLink.setAttribute("href", "#" + trName);
+        trailReturnLink.textContent = "Back to trail"
+        trailReturnLink.classList = "has-text-danger-dark"
         for (var i = 0; i < hourlyForecast.length; ++i) {
           var forecastHour = currentDate.add(i, "hour").format("h A");
           var forecastCondition = hourlyForecast[i].weather[0].description;
@@ -131,6 +135,9 @@ var getLocationData = function (searchLocation) {
     $(this).remove();
   });
   $(".topLink").each(function(){
+    $(this).remove();
+  })
+  $(".dirInfoLink").each(function(){
     $(this).remove();
   })
   fetch(
@@ -224,11 +231,10 @@ var getLocationData = function (searchLocation) {
                // console.log(trName);
                 var trailDivEl = document.createElement("div");
                 trailDivEl.classList ="trailDiv box has-background-danger-dark has-text-white mb-0";
+                trailDivEl.setAttribute("id", trName);
                 var ulEl = document.createElement("ul");
-                var liEl = document.createElement("li");
-                liEl.innerHTML ="<span id='thisTrName'>" + trName + "</span>";
-                var trliEl = document.createElement("li");
-                trliEl.textContent = trName;
+                var trNameLiEl = document.createElement("li");
+                trNameLiEl.innerHTML ="<span id='thisTrName' class='is-size-4'>" + trName + "</span>";
                 
                // console.log("Lat: " + trLat, "Lon: " + trLon);
                 var latliEl=document.createElement('li');
@@ -244,16 +250,23 @@ var getLocationData = function (searchLocation) {
                 var trdliEl=document.createElement('li');
                 trdliEl.textContent="Difficulty: " + trDifficulty;
                // console.log("Difficulty: " + trDifficulty);
+               var instructionsEL = document.createElement('li');
+               instructionsEL.classList = "has-text-dark";
+               instructionsEL.innerHTML= "Click on this red info box to see an <span class='has-text-weight-bold'>8 Hour weather forecast</span> for this trail.";
 
-                var direliEl=document.createElement('li');
-
-                direliEl.innerHTML = "<a href='" + directions + "' target='_blank' class='has-text-dark has-text-weight-bold'>Directions</a>";
+                var direliEl=document.createElement('span');
+                direliEl.classList = "pl-5 is-inline"
+                direliEl.innerHTML = "<a href='" + directions + "' target='_blank' class='has-text-white has-text-weight-bold'>Directions</a>";
               //  console.log(directions);
-                var infoliEl=document.createElement('li');
-                infoliEl.innerHTML = "<a href='" + moreInformation + "' target='_blank' class='has-text-dark has-text-weight-bold'>More Information</a>";
+                var infoliEl=document.createElement('span');
+                infoliEl.classList = "pr-5 is-inline"
+                infoliEl.innerHTML = "<a href='" + moreInformation + "' target='_blank' class='has-text-white has-text-weight-bold'>More Information</a>";
+                var dirInfoContainer = document.createElement("div");
+                dirInfoContainer.classList = "dirInfoLink is-flex is-justify-content-space-between mt-2";
+                dirInfoContainer.append(direliEl,infoliEl);
               //  console.log(moreInformation);          
                
-                ulEl.append(liEl,trSliEl, trliEl,latliEl,trliEl,trdliEl,direliEl,infoliEl);
+                ulEl.append(trNameLiEl,trSliEl, trliEl,latliEl,trliEl,trdliEl,instructionsEL);
                 trailDivEl.append(ulEl);
                 trailSectionEl.append(trailDivEl);
                 var topReturnContainer = document.createElement('div');
@@ -263,6 +276,7 @@ var getLocationData = function (searchLocation) {
                 topReturnEl.classList = "topLink has-text-link";
                 topReturnEl.textContent = "back to top";
                 topReturnContainer.append(topReturnEl);
+                trailSectionEl.append(dirInfoContainer);
                 trailSectionEl.append(topReturnContainer);
               }
               }
