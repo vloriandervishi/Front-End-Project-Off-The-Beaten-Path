@@ -38,6 +38,8 @@ h1 {
 
 .search-history {
     width: 100%;
+    white-space: normal;
+    height: 3em;
 }
 /* #searchPanel {
     background-color: rgb(83, 76, 76);

@@ -1,5 +1,10 @@
 # Off the Beaten Path
-![Screenshot of Off the Beaten Path](./screenshots/screenshot-1.png)
+![Screenshot of Off the Beaten Path](./screenshots/screenshot-1.jpg)
+Mobile Header              |  Mobile Forecast
+:-------------------------:|:-------------------------:
+![Screenshot of Off the Beaten Path Mobile Header](./screenshots/screenshot-mobile-1.jpg) |  ![Screenshot of Off the Beaten Path Mobile Forecast](./screenshots/screenshot-mobile-2.png)
+
+
 
 ## Purpose
 A simple app that helps you find hiking trails nearby your chosen location. 
