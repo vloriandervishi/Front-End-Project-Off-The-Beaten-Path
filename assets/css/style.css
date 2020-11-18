@@ -65,6 +65,7 @@ header {
     }
     .hero {
         height: 40vh;
+        background-attachment: local;
     }
     .search-history {
         max-width: 50%;
@@ -75,6 +76,10 @@ header {
 @media screen and (max-width: 539px) {
     #titleContainer {
         flex-direction: column;
+    }
+
+    .hero {
+        height: 30vh;
     }
 
     h1 {
