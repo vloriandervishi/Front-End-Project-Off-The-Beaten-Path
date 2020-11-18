@@ -27,6 +27,11 @@ h1 {
     padding-right: 2em;
 }
 
+.panel-heading {
+    font-size: 2rem;
+    padding: 0 1em .62em 1em;
+}
+
 .search-history {
     width: 100%;
 }
