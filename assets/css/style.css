@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+h1 {
+    margin: 1.5rem;
+}
+
 .hero {
   display: flex;
   justify-content: center;
@@ -74,9 +78,9 @@ header {
 }    
 
 @media screen and (max-width: 539px) {
-    #titleContainer {
+    /* #titleContainer {
         flex-direction: column;
-    }
+    } */
 
     .hero {
         height: 30vh;
@@ -84,6 +88,13 @@ header {
 
     h1 {
         text-align: center;
+        width: 60%;
+        margin: 1.5rem .5rem;
+    }
+
+
+    .title.is-2 {
+        font-size: 2rem;
     }
 
     #logoContainer {
