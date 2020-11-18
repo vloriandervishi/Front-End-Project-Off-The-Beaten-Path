@@ -18,13 +18,13 @@
   <body class="has-background-dark">
     <main>
       <header id="header" class="is-justify-content-center">
-        <div class="is-flex is-align-content-center is-justify-content-center">
+        <div class="is-flex is-align-content-center is-justify-content-center" id="titleContainer">
           <h1
-            class="title is-strong is-1 has-text-danger-dark m-5"
+            class="title is-strong is-2 has-text-danger-dark m-5"
           >
             Off The Beaten Path
           </h1>
-          <figure>
+          <figure  id="logoContainer">
             <img
               src="./assets/Images/Off The Beaten Path SVG With Mountains and Background layer.svg"
               class="image is-96x96"
@@ -35,7 +35,7 @@
       <!-- hero/jumbotron -->
       <section class="hero is-medium is-justify-content-center" id="hero">
         <div class="hero-body has-text-white has-text-strong is-flex is-justify-content-center is-align-items-center container" id="hero-body">
-          <h1 class="has-text-weight-bold is-size-1 is-justify-content-center p-5 is-hidden-mobile">
+          <h1 class="has-text-weight-bold is-size-2 is-justify-content-center p-5 is-hidden-mobile">
             <span>Do</span>
             <span>not</span>
             <span>follow</span>
@@ -61,10 +61,10 @@
         </div>
       </section>
       <div class="is-justify-content-center">
-        <div class="columns has-border">
+        <div class="columns has-border" id="infoBody">
           <!-- Search History -->
           <section class="column is-one-fifth">
-            <nav class="panel has-background-grey-dark ml-5">
+            <nav class="panel has-background-grey-dark">
               <h2
                 class="panel-heading has-text-centered has-text-white has-background-dark"
               >
@@ -86,8 +86,8 @@
                   </button>
                 </form>
               </div>
-              <p class="panel-tabs has-text-danger-dark">Search History</p>
-              <div class="is-justify-content-center" id="historyContainer"></div>
+              <p class="panel-tabs has-text-danger-dark py-2 is-size-5">Search History</p>
+              <div id="historyContainer"></div>
             </nav>
           </section>
           <!-- Trail Info-list -->

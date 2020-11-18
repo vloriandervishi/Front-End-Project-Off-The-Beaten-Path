@@ -318,7 +318,7 @@ var loadHistory = function() {
       for (var i = 0; i < locationHistory.length; ++i) {
           var historyEl = document.createElement("button");
           historyEl.textContent = locationHistory[i];
-          historyEl.classList = "button is-fullwidth p-3 search-history is-clipped has-background-dark has-text-white has-text-left";
+          historyEl.classList = "search-history button p-3 is-clipped has-background-dark has-text-white has-text-left";
           $("#historyContainer").append(historyEl);
       }
   }    
