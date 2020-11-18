@@ -1,5 +1,5 @@
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .hero {
@@ -22,21 +22,25 @@
 }
 
 .trailDiv:hover {
-    box-shadow: 0 0 5px rgb(255, 255, 255);
+  box-shadow: 0 0 5px rgb(255, 255, 255);
 }
 
 #trail-info-section a {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 #trail-info-section a.topLink {
-    text-decoration: none;
+  text-decoration: none;
 }
-
 
 header {
   padding: 10px;
-  background-image: linear-gradient(to bottom right, rgb(26, 26, 26), rgb(54, 54, 54), rgb(204, 15, 53));
+  background-image: linear-gradient(
+    to bottom right,
+    rgb(26, 26, 26),
+    rgb(54, 54, 54),
+    rgb(204, 15, 53)
+  );
 }
 /* .box {
   width: 90%;
