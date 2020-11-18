@@ -170,7 +170,7 @@ var getLocationData = function (searchLocation) {
         // This resultPlacename should be displayed at the top of the trail info list
         // It can take the place of the textContent of the h2 that says "Trail Info:"
         var trailHeadingEl = document.getElementById("trail-info");
-        trailHeadingEl.textContent = resultPlaceName + " trail info:";
+        trailHeadingEl.textContent = resultPlaceName + " Trail Info:";
         updateHistory(resultPlaceName);
         console.log(resultPlaceName);
 
@@ -318,7 +318,7 @@ var loadHistory = function() {
       for (var i = 0; i < locationHistory.length; ++i) {
           var historyEl = document.createElement("button");
           historyEl.textContent = locationHistory[i];
-          historyEl.classList = "search-history is-clipped has-background-danger-dark has-text-white has-text-left";
+          historyEl.classList = "box is-fullwidth p-3 search-history is-clipped has-background-dark has-text-white has-text-left";
           $("#historyContainer").append(historyEl);
       }
   }    

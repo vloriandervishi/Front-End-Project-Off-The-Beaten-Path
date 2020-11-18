@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 .hero {
   display: flex;
   justify-content: center;
@@ -8,12 +12,17 @@
   align-items: flex-start;
   background-attachment: fixed;
 }
+
+/* #searchPanel {
+    background-color: rgb(83, 76, 76);
+} */
+
 #infoBox {
   width: 100%;
 }
 
 .trailDiv:hover {
-    box-shadow: 0 0 5px rgb(255, 255, 255);;
+    box-shadow: 0 0 5px rgb(255, 255, 255);
 }
 
 #trail-info-section a {
@@ -24,6 +33,11 @@
     text-decoration: none;
 }
 
-#historyContainer .search-history {
-    width: 50%;
+
+header {
+  padding: 10px;
+  background-image: linear-gradient(to bottom right, rgb(26, 26, 26), rgb(54, 54, 54), rgb(204, 15, 53));
 }
+/* .box {
+  width: 90%;
+} */
