@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 .hero {
   display: flex;
   justify-content: center;
@@ -8,6 +12,11 @@
   align-items: flex-start;
   background-attachment: fixed;
 }
+
+/* #searchPanel {
+    background-color: rgb(83, 76, 76);
+} */
+
 #infoBox {
   width: 100%;
 }
@@ -25,8 +34,8 @@
 }*/
 header {
   padding: 10px;
-  background-image: linear-gradient(to bottom right, rgb(26, 26, 26), rgb(54, 54, 54), rgb(204, 15, 53)););
+  background-image: linear-gradient(to bottom right, rgb(26, 26, 26), rgb(54, 54, 54), rgb(204, 15, 53));
 }
-.box {
+/* .box {
   width: 90%;
-}
+} */
