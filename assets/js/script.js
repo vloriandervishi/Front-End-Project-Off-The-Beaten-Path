@@ -344,14 +344,14 @@ var loadHistory = function () {
     return;
   } else {
     // This creates the search history elements
-    for (var i = 0; i < locationHistory.length; ++i) {
-      var historyEl = document.createElement("button");
-      historyEl.textContent = locationHistory[i];
-      historyEl.classList =
-        "box is-fullwidth p-3 search-history is-clipped has-background-dark has-text-white has-text-left";
-      $("#historyContainer").append(historyEl);
-    }
-  }
+      for (var i = 0; i < locationHistory.length; ++i) {
+          var historyEl = document.createElement("button");
+          historyEl.textContent = locationHistory[i];
+          historyEl.classList = "search-history button p-3 is-clipped has-background-dark has-text-white has-text-left";
+          $("#historyContainer").append(historyEl);
+      }
+  }    
+
 };
 
 var updateHistory = function (resultPlaceName) {

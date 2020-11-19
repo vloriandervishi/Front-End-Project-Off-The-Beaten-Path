@@ -11,34 +11,64 @@
       src="https://kit.fontawesome.com/5f706452ba.js"
       crossorigin="anonymous"
     ></script>
-    <link rel="stylesheet" href="./assets/css/style.css" />
+    <link rel="icon" type="image/ico" href="./assets/Images/Off-The-Beaten-Path-ICO.ico">
+    <link rel="stylesheet" href="./assets/css/style.css">
     <title>Off the Beaten Path</title>
   </head>
   <body class="has-background-dark">
     <main>
-      <header id="header">
-        <h1 class="title is-strong is-1 has-text-centered has-text-danger-dark">
-          Off The Beaten Path
-          <span class="icon is-large">
+      <header id="header" class="is-justify-content-center">
+        <div class="is-flex is-align-content-center is-justify-content-center" id="titleContainer">
+          <h1
+            class="title is-strong is-2 has-text-danger-dark"
+          >
+            Off The Beaten Path
+          </h1>
+          <figure  id="logoContainer">
             <img
               src="./assets/Images/Off The Beaten Path SVG With Mountains and Background layer.svg"
+              class="image is-96x96"
             />
-          </span>
-        </h1>
+          </figure>
+        </div>
       </header>
       <!-- hero/jumbotron -->
-      <section class="hero is-medium" id="hero">
-        <div class="hero-body"></div>
+      <section class="hero is-medium is-justify-content-center" id="hero">
+        <div class="hero-body has-text-white has-text-strong is-flex is-justify-content-center is-align-items-center container" id="hero-body">
+          <h1 class="has-text-weight-bold is-justify-content-center p-5">
+            <span>Do</span>
+            <span>not</span>
+            <span>follow</span>
+            <span>where</span>
+            <span>the</span>
+            <span>path</span>
+            <span>may</span>
+            <span>lead. </span>
+            <span>Go</span>
+            <span>instead</span>
+            <span>where</span>
+            <span>there</span>
+            <span>is</span>
+            <span>no</span>
+            <span>path</span>
+            <span>and</span>
+            <span>leave</span>
+            <span>a</span>
+            <span>trail!</span>
+            <br>
+            <span>- Ralph Emerson</span>
+          </h1>
+        </div>
       </section>
       <div class="is-justify-content-center">
-        <div class="columns has-border">
+        <div class="columns has-border" id="infoBody">
           <!-- Search History -->
           <section class="column is-one-fifth">
-            <nav class="panel has-background-grey-dark mx-5">
+            <nav class="panel has-background-grey-dark">
               <h2
                 class="panel-heading has-text-centered has-text-white has-background-dark"
               >
-                Search a Location
+                Location:
               </h2>
               <div class="panel-block" id="searchPanel">
                 <form class="field is-flex" id="searchContainer">
@@ -56,8 +86,8 @@
                   </button>
                 </form>
               </div>
-              <p class="panel-tabs">Search History</p>
-              <div class="is-justified-center" id="historyContainer"></div>
+              <p class="panel-tabs has-text-white has-text-weight-bold py-2 is-size-5">Search History</p>
+              <div id="historyContainer"></div>
             </nav>
           </section>
           <!-- Trail Info-list -->
