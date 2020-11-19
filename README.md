@@ -73,7 +73,7 @@ https://craig5117.github.io/off-the-beaten-path/
 
 - HTML
   - UI Panel
-- CSS
+- CSS (Bulma Framework)
 
 ### Contact Info:
 
