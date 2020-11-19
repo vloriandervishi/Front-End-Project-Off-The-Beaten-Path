@@ -1,73 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
+    />
+    <script
+      src="https://kit.fontawesome.com/5f706452ba.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="icon" type="image/ico" href="./assets/Images/Off-The-Beaten-Path-ICO.ico">
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Off the Beaten Path</title>
-</head>
-<body class="has-background-dark">
+  </head>
+  <body class="has-background-dark">
     <main>
-        <header>
-            <h1 class="title is-strong is-1 has-text-centered has-text-danger-dark">Off The Beaten Path</h1>
-        </header>
-        <!-- hero/jumbotron -->
-        <section class="hero is-medium">
-            <div class="hero-body">
-                <div class="field is-flex">
-                    <label for="trail" class="has-text-white">Search a location: </label>
-                    <input type="text" name="trailName" id="trail-input-name" placeholder="Search a Location" class="input is-medium is-danger">
-                    <button class="button is-medium is-dark" type="submit">Submit</button>
-                </div>
-            </div>
-        </section>
-        <div>
-            <div class="columns has-border">
-                <!-- Trail Info-list -->
-                <section class="column is-half">
-                    <h2 class="title has-text-white has-text-centered">Trail Info:</h2>
-                    <div id="info-wrapper">
-                        <p class="box"></p>
-                    </div>
-                </section>
-                <!-- Weather Data -->
-                <section class="column is-one-third">
-                    <h2 class="title has-text-centered has-text-white">Weather Data: </h2>
-                    <div class="rows has-text-white" id="weather-wrapper">
-                        <div class="box">
-                            <span></span>
-                        </div>
-                        <div class="box">
-                            <span></span>
-                        </div>
-                        <div class="box">
-                            <span></span>
-                        </div>
-                        <div class="box">
-                            <span></span>
-                        </div>
-                        <div class="box">
-                            <span></span>
-                        </div>
-                        <div class="box">
-                            <span></span>
-                        </div>
-                        <div class="box">
-                            <span></span>
-                        </div>
-                        <div class="box">
-                            <span></span>
-                        </div>
-                    </div>
-                </section>
-                <!-- Search History -->
-                <section class="column is-one-fifth">
-                    <h2 class="title has-text-white has-text-centered">Search History:</h2>
-                </section>
-            </div>
+      <header id="header" class="is-justify-content-center">
+        <div class="is-flex is-align-content-center is-justify-content-center" id="titleContainer">
+          <h1
+            class="title is-strong is-2 has-text-danger-dark"
+          >
+            Off The Beaten Path
+          </h1>
+          <figure  id="logoContainer">
+            <img
+              src="./assets/Images/Off The Beaten Path SVG With Mountains and Background layer.svg"
+              class="image is-96x96"
+            />
+          </figure>
         </div>
+      </header>
+      <!-- hero/jumbotron -->
+      <section class="hero is-medium is-justify-content-center" id="hero">
+        <div class="hero-body has-text-white has-text-strong is-flex is-justify-content-center is-align-items-center container" id="hero-body">
+          <h1 class="has-text-weight-bold is-justify-content-center p-5">
+            <span>Do</span>
+            <span>not</span>
+            <span>follow</span>
+            <span>where</span>
+            <span>the</span>
+            <span>path</span>
+            <span>may</span>
+            <span>lead. </span>
+            <span>Go</span>
+            <span>instead</span>
+            <span>where</span>
+            <span>there</span>
+            <span>is</span>
+            <span>no</span>
+            <span>path</span>
+            <span>and</span>
+            <span>leave</span>
+            <span>a</span>
+            <span>trail!</span>
+            <br>
+            <span>- R. W. Emerson</span>
+          </h1>
+        </div>
+      </section>
+      <div class="is-justify-content-center">
+        <div class="columns has-border" id="infoBody">
+          <!-- Search History -->
+          <section class="column is-one-fifth">
+            <nav class="panel has-background-grey-dark">
+              <h2
+                class="panel-heading has-text-centered has-text-white has-background-dark"
+              >
+                Location:
+              </h2>
+              <div class="panel-block" id="searchPanel">
+                <form class="field is-flex" id="searchContainer">
+                  <input
+                    type="text"
+                    name="trailName"
+                    id="trail-input-name"
+                    placeholder="Search a Location"
+                    class="input is-danger"
+                  />
+                  <button id="submit" class="button is-dark" type="submit">
+                    <span>
+                      <i class="fas fa-search"></i>
+                    </span>
+                  </button>
+                </form>
+              </div>
+              <p class="panel-tabs has-text-white has-text-weight-bold py-2 is-size-5">Search History</p>
+              <div id="historyContainer"></div>
+            </nav>
+          </section>
+          <!-- Trail Info-list -->
+          <section class="column is-half" id="trail-info-section">
+            <h2 class="title has-text-white has-text-centered" id="trail-info">
+              Trail Info:
+            </h2>
+            <div class="trailDiv box has-background-danger-dark has-text-white">
+              <p>
+                This app will retrieve information on hiking trails within 50
+                miles of your location, if there are any in the area. For best
+                results, search a city/town name or an address. Allow location
+                services so we can provide you with directions to your desired
+                trail.
+              </p>
+            </div>
+          </section>
+          <!-- Weather Data -->
+          <section class="column is-one-quarter pb-6">
+            <h2
+              class="title has-text-centered has-text-white"
+              id="weather-info"
+            >
+              Forecast:
+            </h2>
+            <div id="trailReturnContainer" class="pl-5 mb-3">
+              <a id="backToTrail"></a>
+            </div>
+            <div class="rows has-text-white" id="weather-wrapper">
+              <!-- CityNme Display  -->
+              <div class="box">
+                <span id="bx1"
+                  >Click on a trail's info box to see that trail's weather
+                  forecast for the next 8 hours.</span
+                >
+              </div>
+              <div class="box">
+                <span id="bx2"></span>
+              </div>
+              <div class="box">
+                <span id="bx3"></span>
+              </div>
+              <div class="box">
+                <span id="bx4"></span>
+              </div>
+              <div class="box">
+                <span id="bx5"></span>
+              </div>
+              <div class="box">
+                <span id="bx6"></span>
+              </div>
+              <div class="box">
+                <span id="bx7"></span>
+              </div>
+              <div class="box">
+                <span id="bx8"></span>
+              </div>
+            </div>
+            <div class="weatherTop has-text-right pr-6 mt-2 mb-3">
+              <a href="#header" class="has-text-link">back to top</a>
+            </div>
+          </section>
+        </div>
+      </div>
     </main>
     <footer></footer>
-</body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.9.6/dayjs.min.js"
+      integrity="sha512-C2m821NxMpJ4Df47O4P/17VPqt0yiK10UmGl59/e5ynRRYiCSBvy0KHJjhp2XIjUJreuR+y3SIhVyiVilhCmcQ=="
+      crossorigin="anonymous"
+    ></script>
+    <script src="./assets/js/script.js"></script>
+  </body>
 </html>
