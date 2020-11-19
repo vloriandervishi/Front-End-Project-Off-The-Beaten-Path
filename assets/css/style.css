@@ -32,6 +32,14 @@
     padding: 0 1em .62em 1em;
 }
 
+#searchPanel {
+    width: 100%
+}
+
+form {
+    margin: 0 auto;
+}
+
 .input {
     width: 80%;
 }
