@@ -2,7 +2,7 @@
     box-sizing: border-box;
 }
 
-h1 {
+#titleContainer h1 {
     margin: 1.5rem;
 }
 
@@ -49,6 +49,7 @@ h1 {
     max-width: 40ch;
     transform: scale(0.94);
     animation: scale 3s forwards cubic-bezier(0.5, 1, 0.89, 1);
+    font-size: 2.5rem;
   }
   
   @keyframes scale {
@@ -188,6 +189,18 @@ header {
         height: 40vh;
         background-attachment: local;
     }
+
+    #hero-body {
+        width: 98%;
+    }
+
+    #hero-body h1 {
+        width: 71%;
+        font-size: 1.5rem;
+        white-space: normal;
+       
+        
+    }
     .search-history {
         max-width: 50%;
     }
@@ -203,12 +216,16 @@ header {
         height: 30vh;
     }
 
-    h1 {
+    #titleContainer h1 {
         text-align: center;
         width: 60%;
         margin: 1.5rem .5rem;
     }
 
+    #hero-body h1 {
+        width: 100%;
+        font-size: .75rem;
+    }
 
     .title.is-2 {
         font-size: 2rem;
